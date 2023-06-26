@@ -17,8 +17,12 @@
     $query = $connection->query('SELECT * FROM posts');
 
     // Execute the query and assign the result to $posts
-    while($row = $query->fetch(PDO::FETCH_ASSOC)) {
-        echo $row['title'] . '<br>';
+    // while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+    //     echo $row['title'] . '<br>';
+    // }
+    
+    while($row = $query->fetch(PDO::FETCH_OBJ)) {
+        echo $row->title . '<br>';
     }
 
 
