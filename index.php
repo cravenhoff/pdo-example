@@ -1,21 +1,13 @@
 <?php
-    // Include database config file
-    include 'config/database.php';
-
-    ### ------------------ PDO Query ------------------ ###
-
-    /* Retrieve all records from database 'posts' table */
-    // Create the query
-    $query = $connection->query('SELECT * FROM posts');
-
-    // Execute the query and assign the result to $posts
-    // while($row = $query->fetch(PDO::FETCH_ASSOC)) {
-    //     echo $row['title'] . '<br>';
-    // }
-    
-    while($row = $query->fetch(PDO::FETCH_OBJ)) {
-        echo $row->title . '<br>';
-    }
-
-
+    // Include header template
+    include 'inc/header.php';
 ?>
+
+<h1>PDO: PHP Data Object</h1>
+
+<ul>
+    <li><a href="query.php">PDO Query</a></li>
+    <li><a href="prepared.php">PDO Prepared Statements</a></li>
+</ul>
+
+<?php include 'inc/footer.php'; ?>
