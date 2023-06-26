@@ -1,6 +1,5 @@
 <?php
     /* Establish database connection */
-
     // Create constants to store the database credentials
     $host = 'localhost';
     $user = 'crys';
@@ -14,18 +13,13 @@
     $connection = new PDO($dsn, $user, $password);
     
     /* Retrieve all records from database 'posts' table */
-    
     // Create the query
     $query = $connection->query('SELECT * FROM posts');
 
     // Execute the query and assign the result to $posts
-    $posts = $query->fetchAll(PDO::FETCH_ASSOC);
-
-    print_r($posts);
-
-    // while($row = $query->fetchAll(PDO::FETCH_OBJ)) {
-    //     echo $row['title'] . '<br>';
-    // }
+    while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+        echo $row['title'] . '<br>';
+    }
 
 
 ?>
