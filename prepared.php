@@ -80,7 +80,7 @@
 
     // Add a new post record to the database using the SQL INSERT statement
     $title = 'Post Seven';
-    $body = 'This is post the seventh post, or post number seven.';
+    $body = 'This is the seventh post.';
     $author = 'Carl';
 
     $sqlCheck = 'SELECT * FROM posts WHERE title = ?';
@@ -99,6 +99,23 @@
     } else {
         echo 'Post Registered.';
     }
+
+    echo '<h3>Update Data</h3>';
+
+    // Update a specific post record
+    $postId = 9;
+    $updatedBody = 'This is the updated post for post number seven.';
+
+    if($postCheck) {
+        $sqlUpdate = 'UPDATE posts SET body = :body WHERE id = :id';
+        $updateStmt = $connection->prepare($sqlUpdate);
+        $updateStmt->execute(['body' => $updatedBody, 'id' => $postId]);
+
+        echo 'Post Successfully Updated.';
+    } else {
+        echo 'Sorry, Cannot Update Non-Existent Post.';
+    }
+
 ?>
 
 <p><a href="./">Back</a></p>
