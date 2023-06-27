@@ -3,6 +3,8 @@
     include 'inc/header.php'; 
 ?>
 
+<a href="./">Back</a>
+
 <h2>PDO Prepared Statements</h2>
 
 <?php    
@@ -26,7 +28,7 @@
     // Execute the query and assign the result to $posts    
     // $query = $connection->prepare($sql);
     // $query->execute([$author]);
-    // $posts = $query->fetchAll(PDO::FETCH_OBJ);
+    // $posts = $query->fetchAll();
 
     // Dump out posts to check that the records were retrieved
     // print_r($posts);
@@ -40,7 +42,7 @@
     // Execute the sql statement and assign the result to $posts    
     $query = $connection->prepare($sql);
     $query->execute([$author, $is_published, $limit]);
-    $posts = $query->fetchAll(PDO::FETCH_OBJ);
+    $posts = $query->fetchAll();
 
     echo '<h3>Fetching All Records</h3>';
 
@@ -60,7 +62,7 @@
     $stmt->execute(['id' => $id]);
     
     // Store retrieved record
-    $post = $stmt->fetch(PDO::FETCH_OBJ);
+    $post = $stmt->fetch();
 
     // Check that the post was retrieved
     // print_r($post);
@@ -87,7 +89,7 @@
     $sqlCheck = 'SELECT * FROM posts WHERE title = ?';
     $checkStmt = $connection->prepare($sqlCheck);
     $checkStmt->execute([$title]);
-    $postCheck = $checkStmt->fetch(PDO::FETCH_OBJ);
+    $postCheck = $checkStmt->fetch();
 
     // var_dump($postCheck);
 
@@ -124,7 +126,7 @@
 
     $postTwoSql = $connection->prepare('SELECT * FROM posts WHERE id = ?');
     $postTwoSql->execute([$postDeleteId]);
-    $post2 = $postTwoSql->fetch(PDO::FETCH_OBJ);
+    $post2 = $postTwoSql->fetch();
 
     if($post2) {
         $sqlDelete = 'DELETE FROM posts WHERE id = :id';
@@ -144,14 +146,12 @@
     $searchSql = 'SELECT * FROM posts WHERE title LIKE ?';
     $searchStmt = $connection->prepare($searchSql);
     $searchStmt->execute([$keyword]);
-    $postsMatch = $searchStmt->fetchAll(PDO::FETCH_OBJ);
+    $postsMatch = $searchStmt->fetchAll();
 
     foreach($postsMatch as $postMatch) {
         echo $postMatch->title . '<br>';
     }
 
 ?>
-
-<p><a href="./">Back</a></p>
 
 <?php include 'inc/footer.php'; ?>

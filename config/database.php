@@ -10,5 +10,6 @@
 
     // Create new PDO instance
     $connection = new PDO($dsn, $user, $password);
+    $connection->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
     $connection->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 ?>

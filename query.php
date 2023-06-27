@@ -3,6 +3,8 @@
     include 'inc/header.php'; 
 ?>
 
+<a href="./">Back</a>
+
 <h2>PDO Query</h2>
 
 <?php    
@@ -17,12 +19,10 @@
     //     echo $row['title'] . '<br>';
     // }
     
-    while($row = $query->fetch(PDO::FETCH_OBJ)) {
+    while($row = $query->fetch()) {
         echo $row->title . '<br>';
     }
 
 ?>
-
-<p><a href="./">Back</a></p>
 
 <?php include 'inc/footer.php'; ?>
