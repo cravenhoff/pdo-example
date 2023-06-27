@@ -32,13 +32,14 @@
     // print_r($posts);
 
     // Fetch multiple posts using 'Named Parameters' via Prepared Statements
-    $author = 'Carl';
+    $author = 'Crystal';
     $is_published = true;
-    $sql = 'SELECT * FROM posts WHERE author = :author && is_published = :is_published';
+    $limit = 2;
+    $sql = 'SELECT * FROM posts WHERE author = ? && is_published = ? LIMIT ?';
 
     // Execute the sql statement and assign the result to $posts    
     $query = $connection->prepare($sql);
-    $query->execute(['author' => $author, 'is_published' => $is_published]);
+    $query->execute([$author, $is_published, $limit]);
     $posts = $query->fetchAll(PDO::FETCH_OBJ);
 
     echo '<h3>Fetching All Records</h3>';
@@ -148,7 +149,6 @@
     foreach($postsMatch as $postMatch) {
         echo $postMatch->title . '<br>';
     }
-
 
 ?>
 
