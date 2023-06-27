@@ -29,7 +29,12 @@
     $posts = $query->fetchAll(PDO::FETCH_OBJ);
 
     // Dump out posts to check that the records were retrieved
-    print_r($posts);
+    // print_r($posts);
+
+    // Loop through all the posts retrieved and output each one by their title
+    foreach($posts as $post) {
+        echo $post->title . '<br>';
+    }
 
 ?>
 
