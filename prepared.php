@@ -76,6 +76,29 @@
 
     echo 'Author ' . $author . ' has a total of ' . $postCount . ' row(s), also known as records.';
 
+    echo '<h3>Insert Data</h3>';
+
+    // Add a new post record to the database using the SQL INSERT statement
+    $title = 'Post Seven';
+    $body = 'This is post the seventh post, or post number seven.';
+    $author = 'Carl';
+
+    $sqlCheck = 'SELECT * FROM posts WHERE title = ?';
+    $checkStmt = $connection->prepare($sqlCheck);
+    $checkStmt->execute([$title]);
+    $postCheck = $checkStmt->fetch(PDO::FETCH_OBJ);
+
+    // var_dump($postCheck);
+
+    if(!$postCheck) {
+        $sqlInsert = 'INSERT INTO posts (title, body, author) VALUES (:title, :body, :author)';
+        $sqlStmt = $connection->prepare($sqlInsert);
+        $sqlStmt->execute(['title' => $title, 'body' => $body, 'author' => $author]);
+
+        echo 'Insert Successful: New Record Added.';
+    } else {
+        echo 'Post Registered.';
+    }
 ?>
 
 <p><a href="./">Back</a></p>
