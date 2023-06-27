@@ -32,7 +32,7 @@
     // print_r($posts);
 
     // Fetch multiple posts using 'Named Parameters' via Prepared Statements
-    $author = 'Crystal';
+    $author = 'Carl';
     $is_published = true;
     $sql = 'SELECT * FROM posts WHERE author = :author && is_published = :is_published';
 
@@ -66,6 +66,16 @@
 
     // Output retrieved post
     echo '<strong>' . $post->title . '</strong>' . '<br>' . $post->body;
+
+    echo '<h3>Row Count</h3>';
+
+    // Count the number of rows that belong to a specific author
+    $rowStmt = $connection->prepare('SELECT * FROM posts WHERE author = ?');
+    $rowStmt->execute([$author]);
+    $postCount = $rowStmt->rowCount();
+
+    echo 'Author ' . $author . ' has a total of ' . $postCount . ' row(s), also known as records.';
+
 ?>
 
 <p><a href="./">Back</a></p>
