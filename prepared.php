@@ -20,16 +20,25 @@
     */
 
     // Fetch multiple posts using 'Positional Parameters' via Prepared Statements
-    $author = 'Crystal';
-    $sql = 'SELECT * FROM posts WHERE author = ?';
+    // $author = 'Crystal';
+    // $sql = 'SELECT * FROM posts WHERE author = ?';
 
     // Execute the query and assign the result to $posts    
-    $query = $connection->prepare($sql);
-    $query->execute([$author]);
-    $posts = $query->fetchAll(PDO::FETCH_OBJ);
+    // $query = $connection->prepare($sql);
+    // $query->execute([$author]);
+    // $posts = $query->fetchAll(PDO::FETCH_OBJ);
 
     // Dump out posts to check that the records were retrieved
     // print_r($posts);
+
+    // Fetch multiple posts using 'Named Parameters' via Prepared Statements
+    $author = 'Carl';
+    $sql = 'SELECT * FROM posts WHERE author = :author';
+
+    // Execute the query and assign the result to $posts    
+    $query = $connection->prepare($sql);
+    $query->execute(['author' => $author]);
+    $posts = $query->fetchAll(PDO::FETCH_OBJ);
 
     // Loop through all the posts retrieved and output each one by their title
     foreach($posts as $post) {
