@@ -20,8 +20,7 @@
     while($row = $query->fetch(PDO::FETCH_OBJ)) {
         echo $row->title . '<br>';
     }
-
-    // Include footer template
-    include 'inc/footer.php';
-
+    
 ?>
+
+<?php include 'inc/footer.php'; ?>
