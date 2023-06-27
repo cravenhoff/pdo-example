@@ -3,7 +3,7 @@
     include 'inc/header.php'; 
 ?>
 
-<h3>PDO Query</h3>
+<h2>PDO Query</h2>
 
 <?php    
     ### ------------------ PDO Query ------------------ ###

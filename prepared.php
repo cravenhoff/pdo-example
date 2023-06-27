@@ -3,7 +3,7 @@
     include 'inc/header.php'; 
 ?>
 
-<h3>PDO Prepared Statements</h3>
+<h2>PDO Prepared Statements</h2>
 
 <?php    
     ### ------------------ PDO Prepared Statements (Prepare and Execute Methods) ------------------ ###
@@ -41,17 +41,17 @@
     $query->execute(['author' => $author, 'is_published' => $is_published]);
     $posts = $query->fetchAll(PDO::FETCH_OBJ);
 
-    echo '<h4>Fetching All Records</h4>';
+    echo '<h3>Fetching All Records</h3>';
 
     // Loop through all the posts retrieved and output each one by their title
     foreach($posts as $post) {
         echo $post->title . '<br>';
     }
 
-    echo '<h4>Fetching Single Record</h4>';
+    echo '<h3>Fetching Single Record</h3>';
 
     // Fetch a single post record using 'Named Parameters' via Prepared Statements
-    $id = 1;
+    $id = 2;
     $sqlStmt = 'SELECT * FROM posts WHERE id = :id';
 
     // Execute the sql statement
@@ -59,11 +59,13 @@
     $stmt->execute(['id' => $id]);
     
     // Store retrieved record
-    $post = $stmt->fetch(PDO::FETCH_ASSOC);
+    $post = $stmt->fetch(PDO::FETCH_OBJ);
 
     // Check that the post was retrieved
-    print_r($post);
+    // print_r($post);
 
+    // Output retrieved post
+    echo '<strong>' . $post->title . '</strong>' . '<br>' . $post->body;
 ?>
 
 <p><a href="./">Back</a></p>
