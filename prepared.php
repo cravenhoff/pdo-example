@@ -135,6 +135,21 @@
         echo 'Sorry, Cannot Delete Non-Exist Post.';
     }
 
+    echo '<h3>Search Data</h3>';
+
+    // Search for a specific keyboard in the database records
+    $keyword = '%n%';
+
+    $searchSql = 'SELECT * FROM posts WHERE title LIKE ?';
+    $searchStmt = $connection->prepare($searchSql);
+    $searchStmt->execute([$keyword]);
+    $postsMatch = $searchStmt->fetchAll(PDO::FETCH_OBJ);
+
+    foreach($postsMatch as $postMatch) {
+        echo $postMatch->title . '<br>';
+    }
+
+
 ?>
 
 <p><a href="./">Back</a></p>
