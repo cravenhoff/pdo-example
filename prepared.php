@@ -51,7 +51,7 @@
     echo '<h3>Fetching Single Record</h3>';
 
     // Fetch a single post record using 'Named Parameters' via Prepared Statements
-    $id = 2;
+    $id = 10;
     $sqlStmt = 'SELECT * FROM posts WHERE id = :id';
 
     // Execute the sql statement
@@ -79,9 +79,9 @@
     echo '<h3>Insert Data</h3>';
 
     // Add a new post record to the database using the SQL INSERT statement
-    $title = 'Post Seven';
-    $body = 'This is the seventh post.';
-    $author = 'Carl';
+    $title = 'Post Nine';
+    $body = 'This is post nine.';
+    $author = 'Crystal';
 
     $sqlCheck = 'SELECT * FROM posts WHERE title = ?';
     $checkStmt = $connection->prepare($sqlCheck);
@@ -103,8 +103,8 @@
     echo '<h3>Update Data</h3>';
 
     // Update a specific post record
-    $postId = 9;
-    $updatedBody = 'This is the updated post for post number seven.';
+    $postId = $postCheck->id;
+    $updatedBody = 'This is the ninth post.';
 
     if($postCheck) {
         $sqlUpdate = 'UPDATE posts SET body = :body WHERE id = :id';
@@ -114,6 +114,25 @@
         echo 'Post Successfully Updated.';
     } else {
         echo 'Sorry, Cannot Update Non-Existent Post.';
+    }
+
+    echo '<h3>Delete Data</h3>';
+
+    // Delete a specific post record
+    $postDeleteId = 4;
+
+    $postTwoSql = $connection->prepare('SELECT * FROM posts WHERE id = ?');
+    $postTwoSql->execute([$postDeleteId]);
+    $post2 = $postTwoSql->fetch(PDO::FETCH_OBJ);
+
+    if($post2) {
+        $sqlDelete = 'DELETE FROM posts WHERE id = :id';
+        $deleteStmt = $connection->prepare($sqlDelete);
+        $deleteStmt->execute(['id' => $postDeleteId]);
+
+        echo 'Post Successfully Deleted.';
+    } else {
+        echo 'Sorry, Cannot Delete Non-Exist Post.';
     }
 
 ?>
