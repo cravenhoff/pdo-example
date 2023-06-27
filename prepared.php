@@ -59,7 +59,7 @@
     $stmt->execute(['id' => $id]);
     
     // Store retrieved record
-    $post = $stmt->fetch();
+    $post = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Check that the post was retrieved
     print_r($post);
